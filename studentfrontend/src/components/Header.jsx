@@ -5,11 +5,13 @@ const Header = ({ isAuthenticated, onLogout }) => {
   return (
     <header>
       <nav className="navbar navbar-dark bg-dark fixed-top">
-        <div className="container d-flex justify-content-between align-items-center">
+        <div className="container">
           <Link to="/" className="navbar-brand">
             Student Management System
           </Link>
-          <div>
+          <div className="ms-auto">
+            {" "}
+            {/* Pushes content to the right */}
             {isAuthenticated ? (
               <button className="btn btn-danger" onClick={onLogout}>
                 Logout
