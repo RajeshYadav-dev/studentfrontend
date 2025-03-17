@@ -16,7 +16,7 @@ const HomeLogin = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      const std_id = localStorage.getItem("std_id"); // Retrieve student ID
+      const std_id = localStorage.getItem("std_id");
       if (std_id) {
         navigate(`/profile/${std_id}`);
       }
@@ -32,12 +32,8 @@ const HomeLogin = ({ setIsAuthenticated }) => {
     setLoading(true);
     setError("");
 
-    console.log("Submitting:", loginDetail); // Debug what is sent
-
     try {
       const response = await loginStudent(loginDetail);
-      console.log("API Response:", response);
-
       const { access_token, student } = response;
 
       localStorage.setItem("token", access_token);
@@ -47,7 +43,6 @@ const HomeLogin = ({ setIsAuthenticated }) => {
 
       navigate(`/profile/${student.std_id}`);
     } catch (error) {
-      console.error("Login Error:", error.response?.data || error.message);
       setError(error.response?.data?.detail || "Invalid email or password");
       toast.error("Login failed. Please check your credentials.");
     } finally {
@@ -56,62 +51,68 @@ const HomeLogin = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div className="container mt-5 col-md-6 offset-3">
-      <div className="row">
-        <div className="card">
-          <div className="card-body">
-            <h1 className="text-center">
-              Welcome To Student Management System
-            </h1>
-            <div className="card">
-              <div className="card-body">
-                <h2 className="text-center">Login</h2>
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-lg-6 col-md-8 col-sm-10">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h1 className="text-center">
+                Welcome To Student Management System
+              </h1>
 
-                {error && <div className="alert alert-danger">{error}</div>}
+              <div className="card mt-3">
+                <div className="card-body">
+                  <h2 className="text-center">Login</h2>
 
-                <form onSubmit={handleOnFormSubmit}>
-                  <div className="form-group">
-                    <label className="mb-2">Email</label>
-                    <input
-                      type="email"
-                      className="form-control mb-2"
-                      placeholder="Enter email"
-                      name="email"
-                      value={loginDetail.email}
-                      onChange={handleOnChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label className="mb-2">Password</label>
-                    <input
-                      type="password"
-                      className="form-control mb-2"
-                      placeholder="Password"
-                      name="password"
-                      value={loginDetail.password}
-                      onChange={handleOnChange}
-                      required
-                    />
-                  </div>
-                  <div className="text-center">
-                    <button
-                      type="submit"
-                      className="btn btn-primary mt-2"
-                      disabled={loading}
-                    >
-                      {loading ? "Logging in..." : "Login"}
-                    </button>
-                  </div>
-                </form>
+                  {error && <div className="alert alert-danger">{error}</div>}
+
+                  <form onSubmit={handleOnFormSubmit}>
+                    <div className="form-group">
+                      <label className="mb-2">Email</label>
+                      <input
+                        type="email"
+                        className="form-control form-control-lg mb-2"
+                        placeholder="Enter email"
+                        name="email"
+                        value={loginDetail.email}
+                        onChange={handleOnChange}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label className="mb-2">Password</label>
+                      <input
+                        type="password"
+                        className="form-control form-control-lg mb-2"
+                        placeholder="Password"
+                        name="password"
+                        value={loginDetail.password}
+                        onChange={handleOnChange}
+                        required
+                      />
+                    </div>
+                    <div className="text-center">
+                      <button
+                        type="submit"
+                        className="btn btn-primary mt-2 w-100"
+                        disabled={loading}
+                      >
+                        {loading ? "Logging in..." : "Login"}
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
 
-            <p className="text-center mt-5">
-              <Link to="/add-student" className="navbar-brand text-center">
-                Don't have an account? Click here to sign up
-              </Link>
-            </p>
+              <p className="text-center mt-4">
+                <Link
+                  to="/add-student"
+                  className="d-block text-decoration-none"
+                >
+                  Don't have an account? <strong>Sign up here</strong>
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
