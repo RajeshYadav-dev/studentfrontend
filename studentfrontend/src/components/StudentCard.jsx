@@ -51,7 +51,7 @@ const StudentCard = () => {
   return (
     <div className="container d-flex align-items-center justify-content-center vh-100">
       <div
-        className="card shadow-lg p-4 rounded w-100 text-center overflow-hidden"
+        className="card shadow-lg p-4 rounded w-100 text-center overflow-hidden back"
         style={{ maxWidth: "600px" }}
       >
         {/* Centered Profile Picture */}
@@ -83,7 +83,7 @@ const StudentCard = () => {
         </div>
 
         {/* Student Name */}
-        <h2 className="fw-bold text-primary">
+        <h2 className="fw-bold text-primary text-capitalize text-white">
           {student.name}
         </h2>
 
@@ -102,10 +102,10 @@ const StudentCard = () => {
 
         {/* Student Details Box */}
         <div className="p-4 bg-light border rounded mt-4">
-          <div className="row text-center">
+          <div className="row text-center back">
             <div className="col-md-6">
               <p>
-                <strong>🧑Name:</strong> {student.name}
+                <strong>🧑Name:</strong> {student.role}
               </p>
               <p>
                 <strong>✉️ Email:</strong> {student.email}
@@ -127,12 +127,12 @@ const StudentCard = () => {
         </div>
 
         {/* Created & Updated Info */}
-        <div className="text-center mt-4">
-          <small className="text-muted">
+        <div className="text-center mt-4 ">
+          <small className="text-muted ">
             🕒 Created: {onlyDate(student.created_at)}
           </small>{" "}
           |
-          <small className="text-muted">
+          <small className="text-muted ">
             {" "}
             Updated: {onlyDate(student.updated_at)}
           </small>

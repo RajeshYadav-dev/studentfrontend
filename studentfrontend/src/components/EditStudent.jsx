@@ -73,7 +73,7 @@ const EditStudent = () => {
       <div className="row">
         <div className="card col-md-8 offset-md-2 my-5">
           <h2 className="text-center">Edit Student</h2>
-          <div className="card-body">
+          <div className="card-body back mb-3">
             <form onSubmit={editStudent}>
               <div className="row">
                 {[

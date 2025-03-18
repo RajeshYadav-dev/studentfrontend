@@ -20,4 +20,13 @@ input:invalid + span::before {
 }
 
 
+body{
+  background-image: linear-gradient(to bottom right, #004d7a, #a8eb12); 
+}
+.back{
+  background-image: linear-gradient(to bottom right, #507c95, #889669); 
+}
+
+
+
 

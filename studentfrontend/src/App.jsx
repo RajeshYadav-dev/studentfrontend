@@ -11,6 +11,7 @@ import ErrorPage from "./components/ErrorPage";
 import HomeLogin from "./components/HomeLogin";
 import AuthGuard from "./components/AuthGuard";
 import { logoutStudent } from "./services/StudentServices";
+import AddAdmin from "./components/AddAdmin";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -33,7 +34,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter >
       <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <Routes>
         <Route
@@ -41,6 +42,7 @@ function App() {
           element={<HomeLogin setIsAuthenticated={setIsAuthenticated} />}
         />
         <Route path="/add-student" element={<AddStudent />} />
+        <Route path="/add-admin" element={<AddAdmin />} />
         <Route
           path="/student-list"
           element={
@@ -49,6 +51,7 @@ function App() {
             </AuthGuard>
           }
         />
+        
         <Route
           path="/edit-student/:std_id"
           element={

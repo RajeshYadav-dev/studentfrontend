@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { addStudent } from "../services/StudentServices";
+import {addAdmin } from "../services/StudentServices";
 import { useNavigate } from "react-router-dom";
 
-const AddStudent = () => {
+const AddAdmin = () => {
   const [student, setStudent] = useState({
     name: "",
     email: "",
@@ -14,6 +14,7 @@ const AddStudent = () => {
     standard: "",
     profile_pic_url: "string",
     is_active: false,
+    role: "admin",
   });
 
   const navigator = useNavigate();
@@ -28,7 +29,7 @@ const AddStudent = () => {
 
   const saveStudent = (event) => {
     event.preventDefault();
-    addStudent(student)
+    addAdmin(student)
       .then(() => {
         setStudent({
           name: "",
@@ -41,13 +42,13 @@ const AddStudent = () => {
           standard: "",
           profile_pic_url: "string",
           is_active: false,
+          role: "admin",
         });
         navigator("/");
       })
       .catch((error) => console.error("Error adding student:", error));
   };
 
-  console.log(student);
 
   return (
     <div className="container">
@@ -65,6 +66,7 @@ const AddStudent = () => {
                   { label: "Date of Birth", name: "dob", type: "date" },
                   { label: "Address", name: "address", type: "text" },
                   { label: "Class", name: "standard", type: "text" },
+                  {label: "Role", name: "role", type: "text"},
                 ].map(({ label, name, type }) => (
                   <div className="col-md-6 mb-3" key={name}>
                     <label className="form-label">{label}</label>
@@ -123,7 +125,7 @@ const AddStudent = () => {
 
               <div className="text-center">
                 <button className="btn btn-success" type="submit">
-                  Add Student
+                  Add Admin
                 </button>
               </div>
             </form>
@@ -134,4 +136,4 @@ const AddStudent = () => {
   );
 };
 
-export default AddStudent;
+export default AddAdmin;

@@ -3,6 +3,7 @@ import { loginStudent } from "../services/StudentServices";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getCurrentStudents } from "../services/StudentServices";
 
 const HomeLogin = ({ setIsAuthenticated }) => {
   const [loginDetail, setLoginDetail] = useState({
@@ -11,17 +12,32 @@ const HomeLogin = ({ setIsAuthenticated }) => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [currentUser, setCurrentUser] = useState(null); // Store user object
 
   const navigate = useNavigate();
 
+  // ✅ Fetch current user once after component mounts
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const std_id = localStorage.getItem("std_id");
-      if (std_id) {
-        navigate(`/profile/${std_id}`);
+    getCurrentStudents()
+      .then((response) => {
+        setCurrentUser(response.data); // Ensure this is an object
+      })
+      .catch((error) => {
+        console.error("Error fetching current user:", error);
+      });
+  }, []); // Runs only once on mount
+
+  // ✅ Redirect if user is logged in
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    if (accessToken && currentUser) {
+      if (currentUser.role === "admin") {
+        navigate("/student-list");
+      } else {
+        navigate(`/profile/${currentUser.std_id}`);
       }
     }
-  }, [navigate]);
+  }, [navigate, currentUser]); // Runs when `currentUser` changes
 
   const handleOnChange = (event) => {
     setLoginDetail({ ...loginDetail, [event.target.name]: event.target.value });
@@ -36,12 +52,16 @@ const HomeLogin = ({ setIsAuthenticated }) => {
       const response = await loginStudent(loginDetail);
       const { access_token, student } = response;
 
-      localStorage.setItem("token", access_token);
+      localStorage.setItem("access_token", access_token);
       localStorage.setItem("std_id", student.std_id);
       setIsAuthenticated(true);
       toast.success("Login successful!");
 
-      navigate(`/profile/${student.std_id}`);
+      if (student.role === "admin") {
+        navigate("/student-list");
+      } else {
+        navigate(`/profile/${student.std_id}`);
+      }
     } catch (error) {
       setError(error.response?.data?.detail || "Invalid email or password");
       toast.error("Login failed. Please check your credentials.");
@@ -54,14 +74,14 @@ const HomeLogin = ({ setIsAuthenticated }) => {
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-lg-6 col-md-8 col-sm-10">
-          <div className="card shadow-sm">
+          <div className="card shadow-sm back">
             <div className="card-body">
               <h1 className="text-center">
                 Welcome To Student Management System
               </h1>
 
               <div className="card mt-3">
-                <div className="card-body">
+                <div className="card-body back">
                   <h2 className="text-center">Login</h2>
 
                   {error && <div className="alert alert-danger">{error}</div>}
@@ -107,7 +127,7 @@ const HomeLogin = ({ setIsAuthenticated }) => {
               <p className="text-center mt-4">
                 <Link
                   to="/add-student"
-                  className="d-block text-decoration-none"
+                  className="d-block text-decoration-none text-white"
                 >
                   Don't have an account? <strong>Sign up here</strong>
                 </Link>

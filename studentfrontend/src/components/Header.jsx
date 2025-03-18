@@ -21,6 +21,9 @@ const Header = ({ isAuthenticated, onLogout }) => {
                 Login
               </Link>
             )}
+            <Link to="/add-admin" className="btn btn-primary">
+              Admin
+            </Link>
           </div>
         </div>
       </nav>

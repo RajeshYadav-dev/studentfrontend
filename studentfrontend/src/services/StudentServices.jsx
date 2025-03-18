@@ -54,6 +54,8 @@ apiClient.interceptors.response.use(
 // ✅ API Functions
 export const getAllStudents = () => apiClient.get("/");
 export const addStudent = (student) => apiClient.post("/", student);
+export const addAdmin = (student) => apiClient.post("/create_admin/", student);
+export const getCurrentStudents = () => apiClient.get("/user/me");
 export const getAStudent = (std_id) => apiClient.get(`/${std_id}/`);
 export const updateStudent = (std_id, student) =>
   apiClient.put(`/${std_id}/`, student);
