@@ -84,7 +84,7 @@ const StudentCard = () => {
 
         {/* Student Name */}
         <h2 className="fw-bold text-primary">
-          {student.first_name} {student.last_name}
+          {student.name}
         </h2>
 
         <div className="d-flex justify-content-center align-items-center gap-3">
@@ -105,7 +105,7 @@ const StudentCard = () => {
           <div className="row text-center">
             <div className="col-md-6">
               <p>
-                <strong>📞 Phone:</strong> {student.phone_number}
+                <strong>🧑Name:</strong> {student.name}
               </p>
               <p>
                 <strong>✉️ Email:</strong> {student.email}
@@ -113,31 +113,15 @@ const StudentCard = () => {
               <p>
                 <strong>🧑‍🎓 Gender:</strong> {student.gender}
               </p>
-              <p>
-                <strong>🎂 DOB:</strong> {onlyDate(student.date_of_birth)}
-              </p>
-              <p>
-                <strong>📊 GPA:</strong> {student.gpa}
-              </p>
             </div>
             <div className="col-md-6">
               <p>
-                <strong>📌 Class:</strong> {student.standard} -{" "}
-                {student.section}
+                <strong>🎂 DOB:</strong> {onlyDate(student.dob)}
               </p>
               <p>
-                <strong>🔢 Roll No:</strong> {student.roll_number}
+                <strong>📞 Phone:</strong> {student.phone_number}
               </p>
-              <p>
-                <strong>📅 Enrollment:</strong>{" "}
-                {onlyDate(student.enrollment_date)}
-              </p>
-              <p>
-                <strong>🌆 City:</strong> {student.city}
-              </p>
-              <p>
-                <strong>🏛️ State:</strong> {student.state}
-              </p>
+              <strong>📌 Class:</strong> {student.standard}
             </div>
           </div>
         </div>

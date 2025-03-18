@@ -6,26 +6,16 @@ const EditStudent = () => {
   const navigator = useNavigate();
   const { std_id } = useParams();
   const [student, setStudent] = useState({
-    first_name: "",
+    name: "",
     last_name: "",
     email: "",
     phone_number: "",
-    date_of_birth: "",
+    dob: "",
     gender: "Male",
     address: "",
-    city: "",
-    state: "",
-    postal_code: "",
     standard: "",
-    section: "",
-    roll_number: "",
-    enrollment_date: "",
-    gpa: 0,
     profile_pic_url: "string",
     is_active: false,
-    guardian_name: "",
-    guardian_contact: "",
-    relationship: "",
   });
 
   useEffect(() => {
@@ -87,43 +77,12 @@ const EditStudent = () => {
             <form onSubmit={editStudent}>
               <div className="row">
                 {[
-                  { label: "First Name", name: "first_name", type: "text" },
-                  { label: "Last Name", name: "last_name", type: "text" },
+                  { label: "Full Name", name: "name", type: "text" },
                   { label: "Email", name: "email", type: "email" },
                   { label: "Phone Number", name: "phone_number", type: "text" },
-                  {
-                    label: "Date of Birth",
-                    name: "date_of_birth",
-                    type: "date",
-                  },
+                  { label: "Date of Birth", name: "dob", type: "date" },
                   { label: "Address", name: "address", type: "text" },
-                  { label: "City", name: "city", type: "text" },
-                  { label: "State", name: "state", type: "text" },
-                  { label: "Postal Code", name: "postal_code", type: "text" },
                   { label: "Class", name: "standard", type: "text" },
-                  { label: "Section", name: "section", type: "text" },
-                  { label: "Roll Number", name: "roll_number", type: "text" },
-                  {
-                    label: "Enrollment Date",
-                    name: "enrollment_date",
-                    type: "date",
-                  },
-                  { label: "GPA", name: "gpa", type: "number" },
-                  {
-                    label: "Guardian Name",
-                    name: "guardian_name",
-                    type: "text",
-                  },
-                  {
-                    label: "Guardian Contact",
-                    name: "guardian_contact",
-                    type: "text",
-                  },
-                  {
-                    label: "Relation with Guardian",
-                    name: "relationship",
-                    type: "text",
-                  },
                 ].map(({ label, name, type }) => (
                   <div className="col-md-6 mb-3" key={name}>
                     <label className="form-label">{label}</label>
@@ -170,7 +129,7 @@ const EditStudent = () => {
 
                 {/* Active Checkbox */}
                 <div className="col-md-6 mb-3">
-                  <label className="form-label me-2">Active</label>
+                  <label className="form-label me-2">Agree to Terms</label>
                   <input
                     type="checkbox"
                     name="is_active"

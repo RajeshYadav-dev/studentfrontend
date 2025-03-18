@@ -4,27 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 const AddStudent = () => {
   const [student, setStudent] = useState({
-    first_name: "",
-    last_name: "",
+    name: "",
     email: "",
-    password: "", // ✅ Added password field
+    password: "",
     phone_number: "",
-    date_of_birth: "",
+    dob: "",
     gender: "Male",
     address: "",
-    city: "",
-    state: "",
-    postal_code: "",
     standard: "",
-    section: "",
-    roll_number: "",
-    enrollment_date: "",
-    gpa: 0,
     profile_pic_url: "string",
     is_active: false,
-    guardian_name: "",
-    guardian_contact: "",
-    relationship: "",
   });
 
   const navigator = useNavigate();
@@ -42,32 +31,23 @@ const AddStudent = () => {
     addStudent(student)
       .then(() => {
         setStudent({
-          first_name: "",
-          last_name: "",
+          name: "",
           email: "",
-          password: "", // ✅ Reset password field
+          password: "",
           phone_number: "",
-          date_of_birth: "",
+          dob: "",
           gender: "Male",
           address: "",
-          city: "",
-          state: "",
-          postal_code: "",
           standard: "",
-          section: "",
-          roll_number: "",
-          enrollment_date: "",
-          gpa: 0,
           profile_pic_url: "string",
           is_active: false,
-          guardian_name: "",
-          guardian_contact: "",
-          relationship: "",
         });
         navigator("/");
       })
       .catch((error) => console.error("Error adding student:", error));
   };
+
+  console.log(student);
 
   return (
     <div className="container">
@@ -78,44 +58,13 @@ const AddStudent = () => {
             <form onSubmit={saveStudent}>
               <div className="row">
                 {[
-                  { label: "First Name", name: "first_name", type: "text" },
-                  { label: "Last Name", name: "last_name", type: "text" },
-                  { label: "Password", name: "password", type: "password" }, // ✅ Added password field
+                  { label: "Full Name", name: "name", type: "text" },
                   { label: "Email", name: "email", type: "email" },
+                  { label: "Password", name: "password", type: "password" },
                   { label: "Phone Number", name: "phone_number", type: "text" },
-                  {
-                    label: "Date of Birth",
-                    name: "date_of_birth",
-                    type: "date",
-                  },
+                  { label: "Date of Birth", name: "dob", type: "date" },
                   { label: "Address", name: "address", type: "text" },
-                  { label: "City", name: "city", type: "text" },
-                  { label: "State", name: "state", type: "text" },
-                  { label: "Postal Code", name: "postal_code", type: "text" },
                   { label: "Class", name: "standard", type: "text" },
-                  { label: "Section", name: "section", type: "text" },
-                  { label: "Roll Number", name: "roll_number", type: "text" },
-                  {
-                    label: "Enrollment Date",
-                    name: "enrollment_date",
-                    type: "date",
-                  },
-                  { label: "GPA", name: "gpa", type: "number" },
-                  {
-                    label: "Guardian Name",
-                    name: "guardian_name",
-                    type: "text",
-                  },
-                  {
-                    label: "Guardian Contact",
-                    name: "guardian_contact",
-                    type: "text",
-                  },
-                  {
-                    label: "Relation with Guardian",
-                    name: "relationship",
-                    type: "text",
-                  },
                 ].map(({ label, name, type }) => (
                   <div className="col-md-6 mb-3" key={name}>
                     <label className="form-label">{label}</label>
@@ -162,7 +111,7 @@ const AddStudent = () => {
 
                 {/* Active Checkbox */}
                 <div className="col-md-6 mb-3">
-                  <label className="form-label me-2">Active</label>
+                  <label className="form-label me-2">Agree to Terms</label>
                   <input
                     type="checkbox"
                     name="is_active"
